@@ -1,5 +1,11 @@
-/project/sandbox/user-workspace/src/main/java/DatabaseConnection.java
-/project/sandbox/user-workspace/src/main/java/User.java
-/project/sandbox/user-workspace/src/main/java/UserDAO.java
-/project/sandbox/user-workspace/src/main/java/Main.java
-/project/sandbox/user-workspace/src/main/java/ReservaDAO.java
+/project/sandbox/user-workspace/src/main/java/com/restaurante/model/FormaPagamento.java
+/project/sandbox/user-workspace/src/main/java/com/restaurante/repository/ReservaRepository.java
+/project/sandbox/user-workspace/src/main/java/com/restaurante/model/Mesa.java
+/project/sandbox/user-workspace/src/main/java/com/restaurante/util/PopularBanco.java
+/project/sandbox/user-workspace/src/main/java/com/restaurante/model/Reserva.java
+/project/sandbox/user-workspace/src/main/java/com/restaurante/repository/ClienteRepository.java
+/project/sandbox/user-workspace/src/main/java/com/restaurante/repository/MesaRepository.java
+/project/sandbox/user-workspace/src/main/java/com/restaurante/model/Cliente.java
+/project/sandbox/user-workspace/src/main/java/com/restaurante/controller/MainApp.java
+/project/sandbox/user-workspace/src/main/java/com/restaurante/repository/AbstractRepository.java
+/project/sandbox/user-workspace/src/main/java/com/restaurante/repository/FormaPagamentoRepository.java
