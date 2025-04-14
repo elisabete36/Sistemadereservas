@@ -1,7 +1,8 @@
-package restaurante.model;
+package com.restaurante.model;
 
 import javax.persistence.*;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "clientes")
@@ -16,10 +17,11 @@ public class Cliente {
     @Column(unique = true, length = 100)
     private String email;
     
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<Reserva> reservas = new ArrayList<>();
+    
     // Construtores
-    public Cliente() {
-        // Construtor padrão necessário para JPA
-    }
+    public Cliente() {}
     
     public Cliente(String nome, String email) {
         this.nome = nome;
@@ -36,42 +38,32 @@ public class Cliente {
     public Long getId() {
         return id;
     }
-    
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getNome() {
         return nome;
     }
-    
+
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
+
     public String getEmail() {
         return email;
     }
-    
+
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Cliente cliente = (Cliente) o;
-        return Objects.equals(id, cliente.id);
+
+    public List<Reserva> getReservas() {
+        return reservas;
     }
-    
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-    
-    @Override
-    public String toString() {
-        return "Cliente{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
     }
 }
