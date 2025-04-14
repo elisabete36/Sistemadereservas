@@ -1,4 +1,4 @@
-package restaurante.repository;
+package com.restaurante.repository;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import java.util.List;
+import java.util.Optional;
 
 public abstract class AbstractRepository<T> {
     private final Class<T> entityClass;
@@ -38,15 +39,16 @@ public abstract class AbstractRepository<T> {
         }
     }
 
-    public T findById(Long id) {
+    public Optional<T> findById(Long id) {
         try (Session session = openSession()) {
-            return session.get(entityClass, id);
+            return Optional.ofNullable(session.get(entityClass, id));
         }
     }
 
     public List<T> findAll() {
         try (Session session = openSession()) {
-            Query<T> query = session.createQuery("FROM " + entityClass.getSimpleName(), entityClass);
+            Query<T> query = session.createQuery(
+                "FROM " + entityClass.getSimpleName(), entityClass);
             return query.getResultList();
         }
     }
