@@ -1,22 +1,37 @@
-package restaurante.repository;
+package com.restaurante.repository;
 
 import com.restaurante.model.Cliente;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
-import java.util.List;
+import javax.persistence.*;
+import java.util.*;
 
-public class ClienteRepository extends AbstractRepository<Cliente> {
-    public ClienteRepository() {
-        super(Cliente.class);
+public class ClienteRepository {
+    private final EntityManager em;
+
+    public ClienteRepository(EntityManager em) {
+        this.em = em;
     }
 
-    public List<Cliente> findByNomeSimilar(String nome) {
-        try (Session session = openSession()) {
-            Query<Cliente> query = session.createQuery(
-                "FROM Cliente c WHERE c.nome LIKE :nome", 
-                Cliente.class);
-            query.setParameter("nome", "%" + nome + "%");
-            return query.getResultList();
+    public void salvar(Cliente cliente) {
+        em.getTransaction().begin();
+        if(cliente.getId() == null) {
+            em.persist(cliente);
+        } else {
+            em.merge(cliente);
         }
+        em.getTransaction().commit();
+    }
+
+    public List<Cliente> buscarPorNome(String nome) {
+        return em.createQuery("SELECT c FROM Cliente c WHERE c.nome LIKE :nome", Cliente.class)
+                .setParameter("nome", "%" + nome + "%")
+                .getResultList();
+    }
+
+    public Optional<Cliente> buscarPorId(Long id) {
+        return Optional.ofNullable(em.find(Cliente.class, id));
+    }
+
+    public List<Cliente> listarTodos() {
+        return em.createQuery("SELECT c FROM Cliente c", Cliente.class).getResultList();
     }
 }
