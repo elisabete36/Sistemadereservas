@@ -1,4 +1,4 @@
-package restaurante.model;
+package com.restaurante.model;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -107,6 +107,31 @@ public class Reserva {
     
     public void setFormaPagamento(FormaPagamento formaPagamento) {
         this.formaPagamento = formaPagamento;
+    }
+
+    // Métodos para cálculo de valores
+    private static final BigDecimal TAXA_VIP = new BigDecimal("50.00");
+    private static final BigDecimal VALOR_BASE = new BigDecimal("100.00");
+    private static final BigDecimal DESCONTO_DINHEIRO = new BigDecimal("0.9");
+
+    public BigDecimal calcularValorTotal() {
+        BigDecimal valor = VALOR_BASE;
+        
+        if (mesa != null && mesa.isVip()) {
+            valor = valor.add(TAXA_VIP);
+        }
+        
+        if (formaPagamento != null && formaPagamento.getTipo() == FormaPagamento.Tipo.DINHEIRO) {
+            valor = valor.multiply(DESCONTO_DINHEIRO);
+        }
+        
+        this.valorTotal = valor.doubleValue();
+        return valor;
+    }
+
+    public BigDecimal calcularTroco(BigDecimal valorPago) {
+        BigDecimal valorTotal = new BigDecimal(this.valorTotal);
+        return valorPago.subtract(valorTotal).max(BigDecimal.ZERO);
     }
     
     @Override
