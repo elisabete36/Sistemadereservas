@@ -27,12 +27,25 @@
             <version>42.5.4</version>
         </dependency>
         
-        <!-- Jakarta EE (substitui javax) -->
+        <!-- Jakarta Persistence -->
         <dependency>
-            <groupId>jakarta.platform</groupId>
-            <artifactId>jakarta.jakartaee-api</artifactId>
-            <version>9.1.0</version>
-            <scope>provided</scope>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        
+        <!-- Bean Validation -->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+        
+        <!-- BigDecimal -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>3.6.1</version>
         </dependency>
 
         <!-- Hibernate -->
@@ -49,12 +62,6 @@
             <version>8.0.1.Final</version>
         </dependency>
         
-        <!-- Spring Boot Starter Web (para controllers) -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>3.1.0</version>
-        </dependency>
         
         <!-- BigDecimal -->
         <dependency>
